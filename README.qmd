@@ -17,8 +17,13 @@ This is the landing page for COMP683 Course Project.
 # the `.Rprofile` from the project root.
 source(".Rprofile")
 
-# setup SLICER by installing dependencies
+# If running for the first time use the code below to setup SLICER by installing dependencies
+# ## SLICER and some other dependencies are no longer on CRAN, thus they must be installed manually
 box::use(mods/setup_SLICER[...])
+
+# If you have run the above, future work may be called by doing the above again or the below:
+library(SLICER) # traditional
+box::use(SLICER[...]) # using `box::use()`
 ```
 
 # Project Proposal
