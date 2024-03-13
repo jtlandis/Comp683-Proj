@@ -18,7 +18,7 @@ This is the landing page for COMP683 Course Project.
 source(".Rprofile")
 
 # setup SLICER by installing dependencies
-box::use(SLICER[...])
+box::use(mods/setup_SLICER[...])
 ```
 
 # Project Proposal
