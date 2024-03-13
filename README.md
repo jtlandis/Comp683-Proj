@@ -1,15 +1,9 @@
----
-title: DE with SLICER
-toc-title: Table of contents
----
+# DE with SLICER
 
-<div>
 
 > **Note**
 >
 > This is a work in progress
-
-</div>
 
 # Group Members
 
@@ -28,8 +22,7 @@ selected by SLICER.
 
 While SLICER automatically selects genes that are important for defining
 a trajectory among the data, it does not associate which features are
-most important to defined cell types.
-`<!-- Not sure if this is true -->`{=html}
+most important to defined cell types. <!-- Not sure if this is true -->
 
 # Related Work
 

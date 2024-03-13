@@ -1,6 +1,8 @@
 ---
 title: DE with SLICER
-format: markdown
+format: 
+  md: default
+  pdf: default
 ---
 
 ::: callout-note
