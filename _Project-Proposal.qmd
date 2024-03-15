@@ -48,3 +48,27 @@ Our code will be posted on [GitHub](https://github.com/jtlandis/Comp683-Proj)
 ## Preliminary Results
 
 TBD
+
+### Notes
+
+As a validation - Perform DE on data set against a known assigned labels (data set must be an RNAseq dataset as we do not know how to do DE with Cytoph -- Natalie??)
+
+-   Use SLICER Workflow
+    -   Potentionally use Dimensionality Reduction Prior to SLICER???
+        -   May make downstream interpretability more difficult.
+    -   To Understand about SLICER
+        -   gene selection `select_genes()`
+        -   k selection for hull (`select_k()`)
+        -   knn embeddings
+        -   LLE
+-   Correlate Geodesic entropy to cells to define junction points.
+-   Perform DE on cells within the Junction (definition of a junction still TBD)
+    -   Either use only the SLICER genes as input, or the whole geneset.
+-   Ideally there will be biologically relevant DE genes within these groups.
+
+Alternatives: compare junction points to each other SLICER Branch
+
+Potentional Problems:
+
+-   Junction sets may not include enough cells to have powered DE results.
+-   
