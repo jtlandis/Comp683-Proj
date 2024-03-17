@@ -1,9 +1,44 @@
 
+
+select_genes2 <- function(embedding) {
+  browser()
+  k = SLICER:::min_conn_k(embedding)
+  n = nrow(embedding)
+  m = ncol(embedding)
+  traj_dist = as.matrix(dist(embedding))
+  adj_mat = adaptive_knn_graph2(traj_dist, rep(k, n))
+  sel_vals = sapply(1:m, selection_val, embedding, adj_mat)
+  genes = which(sel_vals > 1)
+  return(genes)
+}
+
+adaptive_knn_graph2 <- function (traj_dist, k)
+{
+  adj_mat = matrix(0, nrow = nrow(traj_dist), ncol = ncol(traj_dist))
+  knn = t(apply(traj_dist, 1, order))
+  for (i in 1:nrow(traj_dist)) {
+    adj_mat[i, knn[i, 2:(k[i] + 1)]] = traj_dist[i, knn[i,
+                                                        2:(k[i] + 1)]]
+  }
+  return(adj_mat)
+}
+
+# copy_fn <- function(fun) {
+#   rlang::new_function(
+#     args = formals(fun),
+#     body = body(fun),
+#     env = environment(fun)
+#   )
+# }
+#
+# geo_entro <- copy_fn(SLICER::assign_branches) |>
+#   ggside:::mod_fun_at(quote(browser()), 1)
+
 # This is from [SLICER Github](https://github.com/jw156605/SLICER)
 box::use(./setup_SLICER[...],
          lle[lle])
 genes <- select_genes(traj)
-k <- select_k(traj[,genes], kmin=5)
+k <- 15 #select_k(traj[,genes], kmin=5) --> 15
 traj_lle <- lle(traj[,genes], m=2, k)$Y
 traj_graph <- conn_knn_graph(traj_lle,5)
 ends <- find_extreme_cells(traj_graph, traj_lle)
@@ -13,6 +48,8 @@ branches <- assign_branches(traj_graph,start)
 
 # taken from SLICER::compute_geodesic_entropy
 #  this function omits automatic plotting.
+#  Only here to inspect
+
 geodesic_entropy <- function(traj_graph, start){
   smart_table = function(x, n) {
     tab = rep(0, n)
@@ -54,11 +91,18 @@ box::use(tibble[tibble],
 
 p <- tibble(x = traj_lle[,1],
        y = traj_lle[,2],
-       branch = branches,
+       branch = factor(branches),
        order = cells_ordered) |>
   dplyr::arrange(order) |>
-  ggplot(aes(x, y, color = branches)) +
-  geom_point() +
-  geom_path()
+  ggplot(aes(x, y)) +
+  geom_point(aes(color = branch, group = order), size = 6) +
+  geom_point(aes(color = branch, group = order), size = 2)
+  #geom_path()
 
-p + gganimate::transition_reveal(order, keep_last = TRUE)
+p + gganimate::transition_components(order,
+                                     enter_length = 50L, exit_length = 50L) +
+  shadow_mark(exclude_layer = 1) +
+  enter_grow() +
+  enter_fade() +
+  exit_shrink(size = .2) +
+  exit_fade(alpha = .3)

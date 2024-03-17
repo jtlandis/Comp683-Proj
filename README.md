@@ -51,9 +51,13 @@ most important to defined cell types. <!-- Not sure if this is true -->
 
 ## Related Work
 
-TBD
+@Welch2016
 
 ## Contributions
+
+The overall goal of our work is to identify if performing DE based on
+branches assignments by SLICER will lead to biologically significant
+results.
 
 ## Datasets
 
@@ -64,7 +68,30 @@ there are 2).
 
 ## Intended Experiments
 
-TBD
+As a validation, we will perform Differential Expression analysis on
+input data prior to SLICER and then compare the results of the same DE
+pipeline, except only on features selected by SLICER. In practicality,
+this requires a dataset with some experimental labels which will be used
+for differential expression comparisons.
+
+Validation Results:
+
+-   DE on ALL Features, comparing against original experimental labels
+
+Experiments:
+
+-   DE on SLICER Features, comparing against original experimental
+    labels
+
+-   DE on SLICER Features, comparing against SLICER branch labels
+
+-   DE on ALL Features, comparing against SLICER branch labels
+
+In experiments where SLICER Features are used, we intend to do a set
+comparison between DE genes in validation versus the experiment.
+
+In experiments where SLICER branch labels are used, we NMI to assess if
+branches correspond to experimental labels (they may not!)
 
 ## Expected Challenges
 
@@ -75,6 +102,12 @@ need to be locally installed as it was [removed from
 CRAN](https://cran.r-project.org/web/packages/SLICER/index.html) in
 `2022`.
 
+Furthermore, branch assignments seem to be based on the Dimensionality
+Reduction of `LLE`, but the actual trajectories through the graph.
+Additionally, there is no guarantee to the size of branch assignments
+given by SLICER. Assuming one branch is sufficiently small, this may
+lead to under powered DE results.
+
 ## Implementation
 
 Since `SLICER` is implemented in R, we will be implementing our DE in R
@@ -83,4 +116,36 @@ as well. Our code will be posted on
 
 ## Preliminary Results
 
-TBD
+![](SLICER_EXAMPLE.gif)
+
+### Notes
+
+As a validation - Perform DE on data set against a known assigned labels
+(data set must be an RNAseq dataset as we do not know how to do DE with
+Cytoph – Natalie??)
+
+-   Use SLICER Workflow
+    -   Potentially use Dimensional Reduction Prior to SLICER???
+        -   May make downstream results less interpretable.
+        -   Also, the paper expects unprocessed genes as input
+    -   To Understand about SLICER
+        -   ☒ gene selection `select_genes()`
+        -   ☒ k selection for hull (`select_k()`)
+        -   ☒ entropy
+        -   ☐ knn embeddings
+        -   ☐ LLE
+-   Correlate Geodesic entropy to cells to define junction points.
+    -   I am less convinced that we can do this portion.
+-   Perform DE on cells within the Junction (definition of a junction
+    still TBD)
+    -   Either use only the SLICER genes as input, or the whole geneset.
+-   Ideally there will be biologically relevant DE genes within these
+    groups.
+
+Alternatives: compare junction points to each other SLICER Branch
+
+Potentional Problems:
+
+-   Junction sets may not include enough cells to have powered DE
+    results.
+-   
