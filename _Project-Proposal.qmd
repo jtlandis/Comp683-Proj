@@ -1,3 +1,8 @@
+---
+format: pptx
+bibliography: references.bib
+---
+
 ## DE with SLICER
 
 ::: callout-note
@@ -81,7 +86,7 @@ Our preliminary results at the moment just involve running `SLICER`'s workflow o
 ::: {#refs}
 :::
 
-### Notes
+## Notes
 
 As a validation - Perform DE on data set against a known assigned labels (data set must be an RNAseq dataset as we do not know how to do DE with Cytoph -- Natalie??)
 

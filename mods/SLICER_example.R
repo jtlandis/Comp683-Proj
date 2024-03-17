@@ -87,7 +87,8 @@ compute_geodesic_entropy(traj_graph, start)
 compute_geodesic_entropy(traj_graph, 496)
 
 box::use(tibble[tibble],
-         ggplot2[...])
+         ggplot2[...],
+         gganimate[...])
 
 p <- tibble(x = traj_lle[,1],
        y = traj_lle[,2],
@@ -96,13 +97,15 @@ p <- tibble(x = traj_lle[,1],
   dplyr::arrange(order) |>
   ggplot(aes(x, y)) +
   geom_point(aes(color = branch, group = order), size = 6) +
-  geom_point(aes(color = branch, group = order), size = 2)
-  #geom_path()
+  geom_point(aes(color = branch, group = order), size = 2) +
+  labs(x = "Manifold 1", y = "Manifold 2", title = "Cell Ordering") +
+  theme_bw()
 
-p + gganimate::transition_components(order,
-                                     enter_length = 50L, exit_length = 50L) +
+anim <- p + transition_components(order, enter_length = 50L, exit_length = 50L) +
   shadow_mark(exclude_layer = 1) +
   enter_grow() +
   enter_fade() +
   exit_shrink(size = .2) +
   exit_fade(alpha = .3)
+
+animate(anim, duration = 20, fps = 30)
