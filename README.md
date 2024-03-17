@@ -51,7 +51,8 @@ most important to defined cell types. <!-- Not sure if this is true -->
 
 ## Related Work
 
-@Welch2016
+Directly related works are `SLICER` (Welch, Hartemink, and Prins 2016)
+and `DESeq2` (Love, Huber, and Anders 2014)
 
 ## Contributions
 
@@ -103,20 +104,39 @@ CRAN](https://cran.r-project.org/web/packages/SLICER/index.html) in
 `2022`.
 
 Furthermore, branch assignments seem to be based on the Dimensionality
-Reduction of `LLE`, but the actual trajectories through the graph.
+Reduction of `LLE`, but the actual trajectories through the graph may
+bounce between branch assignments (see Preliminary Results).
 Additionally, there is no guarantee to the size of branch assignments
 given by SLICER. Assuming one branch is sufficiently small, this may
-lead to under powered DE results.
+lead to under powered DE results. DE results may not be comparable to
+SLICER results due to the nature of SLICER feature selection (selecting
+genes with low neighborhood variance versus global variance).
 
 ## Implementation
 
 Since `SLICER` is implemented in R, we will be implementing our DE in R
-as well. Our code will be posted on
-[GitHub](https://github.com/jtlandis/Comp683-Proj)
+as well. We will ideally provide an R function that takes a cell by gene
+matrix and returns SLICER results along with supplemental data relating
+to DE analysis. Our code will be posted on
+[GitHub](https://github.com/jtlandis/Comp683-Proj).
 
 ## Preliminary Results
 
 ![](SLICER_EXAMPLE.gif)
+
+Our preliminary results at the moment just involve running `SLICER`’s
+workflow on their own toy dataset.
+
+## References
+
+Love, Michael I., Wolfgang Huber, and Simon Anders. 2014. “Moderated
+Estimation of Fold Change and Dispersion for RNA-Seq Data with DESeq2”
+15: 550. <https://doi.org/10.1186/s13059-014-0550-8>.
+
+Welch, Joshua D., Alexander J. Hartemink, and Jan F. Prins. 2016.
+“SLICER: Inferring Branched, Nonlinear Cellular Trajectories from Single
+Cell RNA-Seq Data.” *Genome Biology* 17 (1).
+<https://doi.org/10.1186/s13059-016-0975-3>.
 
 ### Notes
 

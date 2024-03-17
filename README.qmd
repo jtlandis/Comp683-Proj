@@ -3,6 +3,7 @@ title: README
 format: 
   md: default
   pdf: default
+bibliography: references.bib
 ---
 
 This is the landing page for COMP683 Course Project.
