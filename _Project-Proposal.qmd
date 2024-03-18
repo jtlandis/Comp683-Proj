@@ -1,13 +1,10 @@
 ---
-format: pptx
+title: DE with SLICER
+format:
+  pptx: default
+  pdf: default
 bibliography: references.bib
 ---
-
-## DE with SLICER
-
-::: callout-note
-This is a work in progress
-:::
 
 ## Group Members
 
@@ -27,7 +24,9 @@ While SLICER automatically selects genes that are important for defining a traje
 
 ## Related Work
 
-Directly related works are `SLICER` [@Welch2016] and `DESeq2` [@DESeq2]
+-   Directly related works are `SLICER` [@Welch2016]
+
+-   `DESeq2` [@DESeq2]
 
 ![](slicer_workflow.png)
 
@@ -37,12 +36,18 @@ The overall goal of our work is to identify if performing DE based on branches a
 
 ## Datasets
 
-We will be using data sets from [Single-cell dattasets for temporal gene expression integration](https://zenodo.org/records/6587903), specifically utilizing a few Hematopoiesis differentiation dataset (as there are 2).
+We will be using data sets from [Single-cell datasets for temporal gene expression integration](https://zenodo.org/records/6587903), specifically utilizing a few Hematopoiesis differentiation dataset (as there are 2).
+
+-   [@Nestorowa2016]
+
+-   [@Olsson2016]; [@Olsson2019]
 
 ## Intended Experiments
 
 As a validation, we will perform Differential Expression analysis on input data prior to SLICER and then compare the results of the same DE pipeline, except only on features selected by SLICER.
 In practicality, this requires a dataset with some experimental labels which will be used for differential expression comparisons.
+
+## Intended Experiments Continued
 
 Validation Results:
 
@@ -79,38 +84,12 @@ Our code will be posted on [GitHub](https://github.com/jtlandis/Comp683-Proj).
 
 ## Preliminary Results
 
-![](SLICER_EXAMPLE.gif)
-
 Our preliminary results at the moment just involve running `SLICER`'s workflow on their own toy dataset.
+Please enjoy the following gif revealing cells along `SLICER`'s defined trajectory.
+
+![](SLICER_EXAMPLE.gif)
 
 ## References
 
 ::: {#refs}
 :::
-
-## Notes
-
-As a validation - Perform DE on data set against a known assigned labels (data set must be an RNAseq dataset as we do not know how to do DE with Cytoph -- Natalie??)
-
--   Use SLICER Workflow
-    -   Potentially use Dimensional Reduction Prior to SLICER???
-        -   May make downstream results less interpretable.
-        -   Also, the paper expects unprocessed genes as input
-    -   To Understand about SLICER
-        -   [x] gene selection `select_genes()`
-        -   [x] k selection for hull (`select_k()`)
-        -   [x] entropy
-        -   [ ] knn embeddings
-        -   [ ] LLE
--   Correlate Geodesic entropy to cells to define junction points.
-    -   I am less convinced that we can do this portion.
--   Perform DE on cells within the Junction (definition of a junction still TBD)
-    -   Either use only the SLICER genes as input, or the whole geneset.
--   Ideally there will be biologically relevant DE genes within these groups.
-
-Alternatives: compare junction points to each other SLICER Branch
-
-Potentional Problems:
-
--   Junction sets may not include enough cells to have powered DE results.
--   
