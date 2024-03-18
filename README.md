@@ -1,4 +1,4 @@
-# README
+# DE with SLICER
 
 
 This is the landing page for COMP683 Course Project.
@@ -24,12 +24,6 @@ box::use(SLICER[...]) # using `box::use()`
 
 <!-- include Quarto doc in README -->
 
-## DE with SLICER
-
-> **Note**
->
-> This is a work in progress
-
 ## Group Members
 
 -   Justin Landis
@@ -51,8 +45,12 @@ most important to defined cell types. <!-- Not sure if this is true -->
 
 ## Related Work
 
-Directly related works are `SLICER` (Welch, Hartemink, and Prins 2016)
-and `DESeq2` (Love, Huber, and Anders 2014)
+-   Directly related works are `SLICER` (Welch, Hartemink, and Prins
+    2016)
+
+-   `DESeq2` (Love, Huber, and Anders 2014)
+
+![](slicer_workflow.png)
 
 ## Contributions
 
@@ -62,10 +60,14 @@ results.
 
 ## Datasets
 
-We will be using data sets from [Single-cell dattasets for temporal gene
+We will be using data sets from [Single-cell datasets for temporal gene
 expression integration](https://zenodo.org/records/6587903),
 specifically utilizing a few Hematopoiesis differentiation dataset (as
 there are 2).
+
+-   (Nestorowa et al. 2016)
+
+-   (Olsson et al. 2016); (Olsson et al. 2019)
 
 ## Intended Experiments
 
@@ -74,6 +76,8 @@ input data prior to SLICER and then compare the results of the same DE
 pipeline, except only on features selected by SLICER. In practicality,
 this requires a dataset with some experimental labels which will be used
 for differential expression comparisons.
+
+## Intended Experiments Continued
 
 Validation Results:
 
@@ -122,10 +126,11 @@ to DE analysis. Our code will be posted on
 
 ## Preliminary Results
 
-![](SLICER_EXAMPLE.gif)
-
 Our preliminary results at the moment just involve running `SLICER`’s
-workflow on their own toy dataset.
+workflow on their own toy dataset. Please enjoy the following gif
+revealing cells along `SLICER`’s defined trajectory.
+
+![](SLICER_EXAMPLE.gif)
 
 ## References
 
@@ -133,12 +138,30 @@ Love, Michael I., Wolfgang Huber, and Simon Anders. 2014. “Moderated
 Estimation of Fold Change and Dispersion for RNA-Seq Data with DESeq2”
 15: 550. <https://doi.org/10.1186/s13059-014-0550-8>.
 
+Nestorowa, Sonia, Fiona K. Hamey, Blanca Pijuan Sala, Evangelia
+Diamanti, Mairi Shepherd, Elisa Laurenti, Nicola K. Wilson, David G.
+Kent, and Berthold Göttgens. 2016. “A Single-Cell Resolution Map of
+Mouse Hematopoietic Stem and Progenitor Cell Differentiation.” *Blood*
+128 (8): e20–31. <https://doi.org/10.1182/blood-2016-05-716480>.
+
+Olsson, Andre, Meenakshi Venkatasubramanian, Viren K. Chaudhri, Bruce J.
+Aronow, Nathan Salomonis, Harinder Singh, and H. Leighton Grimes. 2016.
+“Single-Cell Analysis of Mixed-Lineage States Leading to a Binary Cell
+Fate Choice.” *Nature* 537 (7622): 698–702.
+<https://doi.org/10.1038/nature19348>.
+
+Olsson, Andre, Meenakshi Venkatasubramanian, Virendra K. Chaudhri, Bruce
+J. Aronow, Nathan Salomonis, Harinder Singh, and H. Leighton Grimes.
+2019. “Author Correction: Single-Cell Analysis of Mixed-Lineage States
+Leading to a Binary Cell Fate Choice.” *Nature* 569 (7755): E3–3.
+<https://doi.org/10.1038/s41586-019-1107-5>.
+
 Welch, Joshua D., Alexander J. Hartemink, and Jan F. Prins. 2016.
 “SLICER: Inferring Branched, Nonlinear Cellular Trajectories from Single
 Cell RNA-Seq Data.” *Genome Biology* 17 (1).
 <https://doi.org/10.1186/s13059-016-0975-3>.
 
-### Notes
+## Notes
 
 As a validation - Perform DE on data set against a known assigned labels
 (data set must be an RNAseq dataset as we do not know how to do DE with

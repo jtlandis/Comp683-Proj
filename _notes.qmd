@@ -1,0 +1,27 @@
+## Notes
+
+As a validation - Perform DE on data set against a known assigned labels (data set must be an RNAseq dataset as we do not know how to do DE with Cytoph -- Natalie??)
+
+-   Use SLICER Workflow
+    -   Potentially use Dimensional Reduction Prior to SLICER???
+        -   May make downstream results less interpretable.
+        -   Also, the paper expects unprocessed genes as input
+    -   To Understand about SLICER
+        -   [x] gene selection `select_genes()`
+        -   [x] k selection for hull (`select_k()`)
+        -   [x] entropy
+        -   [ ] knn embeddings
+        -   [ ] LLE
+-   Correlate Geodesic entropy to cells to define junction points.
+    -   I am less convinced that we can do this portion.
+-   Perform DE on cells within the Junction (definition of a junction still TBD)
+    -   Either use only the SLICER genes as input, or the whole geneset.
+-   Ideally there will be biologically relevant DE genes within these groups.
+
+Alternatives: compare junction points to each other SLICER Branch
+
+Potentional Problems:
+
+-   Junction sets may not include enough cells to have powered DE results.
+-   
+

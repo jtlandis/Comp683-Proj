@@ -32,3 +32,6 @@ box::use(SLICER[...]) # using `box::use()`
 <!-- include Quarto doc in README -->
 
 {{< include _Project-Proposal.qmd >}}
+
+{{< include _notes.qmd >}}
+
