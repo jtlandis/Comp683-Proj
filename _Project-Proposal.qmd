@@ -29,6 +29,8 @@ While SLICER automatically selects genes that are important for defining a traje
 
 Directly related works are `SLICER` [@Welch2016] and `DESeq2` [@DESeq2]
 
+![](slicer_workflow.png)
+
 ## Contributions
 
 The overall goal of our work is to identify if performing DE based on branches assignments by SLICER will lead to biologically significant results.
