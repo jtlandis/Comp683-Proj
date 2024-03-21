@@ -9,7 +9,7 @@ as_seq <- function(vec) {
   as.integer(f)
 }
 
-data <- h5ad2SE("Comp683-Proj/data/adata_olsson.h5ad")
+data <- h5ad2SE("data/adata_olsson.h5ad")
 ptraj <- t(assay(data, "counts"))
 
 genes <- select_genes(ptraj)
@@ -181,11 +181,12 @@ p <- tibble(x = traj_lle[,1],
             y = traj_lle[,2],
             z = traj_lle[,3],
             branch = factor(branches),
-            order = cells_ordered) |>
+            order = cells_ordered,
+            cell_type = colData(data)$cell_type) |>
   dplyr::arrange(order) |>
   ggplot(aes(x, y)) +
-  geom_point(aes(color = branch, group = order), size = 6) +
-  geom_point(aes(color = branch, group = order), size = 2) +
+  geom_point(aes(color = cell_type, group = order), size = 6) +
+  geom_point(aes(color = cell_type, group = order), size = 2) +
   labs(x = "Manifold 1", y = "Manifold 2", title = "Cell Ordering") +
   theme_bw()
 
