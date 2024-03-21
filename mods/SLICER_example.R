@@ -96,7 +96,7 @@ p <- tibble(x = traj_lle[,1],
        order = cells_ordered) |>
   dplyr::arrange(order) |>
   ggplot(aes(x, y)) +
-  geom_point(aes(color = branch, group = order), size = 6) +
+  # geom_point(aes(color = branch, group = order), size = 6) +
   geom_point(aes(color = branch, group = order), size = 2) +
   labs(x = "Manifold 1", y = "Manifold 2", title = "Cell Ordering") +
   theme_bw()

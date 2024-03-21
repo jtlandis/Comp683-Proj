@@ -39,6 +39,8 @@ calc_path_counts <- function(vpath, which_ind) {
   counts
 }
 
+# This updated function is much faster, as should
+# fix some bugs associated with SLICER package.
 assign_branches <- function (traj_graph, start, min_branch_len = 10, cells = igraph::V(traj_graph))
 {
   # browser()
