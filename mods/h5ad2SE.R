@@ -12,14 +12,15 @@
 box::use(SummarizedExperiment[...],
          Matrix[...])
 
+box::use(reticulate[import],
+         methods[as])
+
+# import scanpy
+scanpy <- import("scanpy")
+
 #' @export
 h5ad2SE <- function(file) {
-  box::use(
-    reticulate[import],
-    methods[as]
-  )
-  # import scanpy
-  scanpy <- import("scanpy")
+
   # read the file
   data <- scanpy$read_h5ad(file)
 
