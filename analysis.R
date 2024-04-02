@@ -35,16 +35,17 @@ p <-  d |>
 p
 
 ## Animation ----
-box::use(gganimate[...])
-anim <- p + transition_components(order, enter_length = 50L, exit_length = 50L) +
-  shadow_mark(exclude_layer = 1) +
-  enter_grow() +
-  enter_fade() +
-  exit_shrink(size = .2) +
-  exit_fade(alpha = .3)
 
-anim_save(box::file("prelim_data.gif"),
-          animation = anim, duration = 20, fps = 30)
+# box::use(gganimate[...])
+# anim <- p + transition_components(order, enter_length = 50L, exit_length = 50L) +
+#   shadow_mark(exclude_layer = 1) +
+#   enter_grow() +
+#   enter_fade() +
+#   exit_shrink(size = .2) +
+#   exit_fade(alpha = .3)
+#
+# anim_save(box::file("prelim_data.gif"),
+#           animation = anim, duration = 20, fps = 30)
 
 ## DESeq2 ----
 
