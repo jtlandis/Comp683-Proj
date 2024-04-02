@@ -113,12 +113,6 @@ data$branches <- relevel(factor(branches), "12")
 dds_branch <- do_deseq(data, ~ branches)
 plot_deseq(dds_branch, padj = 1e-10) -> p2
 
-assay(data, 1) <- as.matrix(assay(data, 1))
-dds <- DESeqDataSet(data, design = ~ cell_type)
-dds_fit <- DESeq(dds)
-res <- results(dds_fit, name = "cell_type_GMP_vs_CMP")
-as_tibble(res, rownames = "gene") |>
-  ggplot(aes(x = log2FoldChange, y = -log(padj))) + geom_point()
 
 (p1 + theme(legend.position = "none", plot.caption = element_blank(), axis.title.x = element_blank())) |>
   cowplot::plot_grid(p2, align = "v", rel_heights = c(1,2.3), ncol = 1) -> cowplot1
