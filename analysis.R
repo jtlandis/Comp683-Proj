@@ -107,12 +107,19 @@ plot_deseq <- function(deseq_res, log2FC = 2, padj = 0.05) {
     scale_color_manual(values = "darkred")
 }
 
+data$cell_type <- relevel(factor(data$cell_type), "LSK")
 dds_cell_type <- do_deseq(data, ~ cell_type)
-plot_deseq(dds_cell_type, padj = 1e-10) -> p1
+p1 <- plot_deseq(dds_cell_type, padj = 1e-10)
 data$branches <- relevel(factor(branches), "12")
 dds_branch <- do_deseq(data, ~ branches)
-plot_deseq(dds_branch, padj = 1e-10) -> p2
+p2 <- plot_deseq(dds_branch, padj = 1e-10)
+
 
 
 (p1 + theme(legend.position = "none", plot.caption = element_blank(), axis.title.x = element_blank())) |>
   cowplot::plot_grid(p2, align = "v", rel_heights = c(1,2.3), ncol = 1) -> cowplot1
+
+## Save Sig-genes ----
+
+readr::write_csv(subset(p1$data, type!=""), file = box::file("cell_type_DE_data.csv"))
+readr::write_csv(subset(p2$data, type!=""), file = box::file("SLICER_branch_DE_data.csv"))
