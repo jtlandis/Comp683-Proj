@@ -130,7 +130,7 @@ Our preliminary results at the moment just involve running `SLICER`’s
 workflow on their own toy dataset. Please enjoy the following gif
 revealing cells along `SLICER`’s defined trajectory.
 
-![](mods/SLICER_example.gif)
+![](SLICER_EXAMPLE.gif)
 
 ## References
 

@@ -18,16 +18,11 @@ tryCatch(invisible(find.package("remotes")),
                       remotes::install_github("cran/lle")
                     })
 
-
-           tryCatch({
-                # see if SLICER is installed
-                invisible(find.package("SLICER"))
-                # require the correct version from github/jtlandis/SLICER
-                stopifnot(utils::packageVersion("SLICER")==package_version("0.2.0.1"))
-                },
+           # see if SLICER is installed
+           tryCatch(invisible(find.package("SLICER")),
                     error = function(cnd) {
                       #if not install it via `remotes`
-                      remotes::install_github("jtlandis/SLICER")
+                      remotes::install_github("jw156605/SLICER")
                     })
          }}())
 
