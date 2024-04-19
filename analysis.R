@@ -120,5 +120,5 @@ p2 <- plot_deseq(dds_branch, padj = 1e-10)
 
 ## Save Sig-genes ----
 
-readr::write_csv(subset(p1$data, type!=""), file = box::file("cell_type_DE_data.csv"))
-readr::write_csv(subset(p2$data, type!=""), file = box::file("SLICER_branch_DE_data.csv"))
+readr::write_csv(subset(p1$data, type!=""), file = box::file("data/output/cell_type_DE_data.csv"))
+readr::write_csv(subset(p2$data, type!=""), file = box::file("data/output/SLICER_branch_DE_data.csv"))
