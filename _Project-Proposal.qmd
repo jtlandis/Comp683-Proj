@@ -87,7 +87,7 @@ Our code will be posted on [GitHub](https://github.com/jtlandis/Comp683-Proj).
 Our preliminary results at the moment just involve running `SLICER`'s workflow on their own toy dataset.
 Please enjoy the following gif revealing cells along `SLICER`'s defined trajectory.
 
-![](SLICER_EXAMPLE.gif)
+![](./figs/SLICER_EXAMPLE.gif)
 
 ## References
 
