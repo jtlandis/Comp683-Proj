@@ -17,7 +17,6 @@ cells_ordered <-cell_order(traj_graph, start)
 branches <- assign_branches(traj_graph,start)
 d <- tibble(x = traj_lle[,1],
             y = traj_lle[,2],
-            # z = traj_lle[,3],
             branch = factor(branches),
             order = order(cells_ordered),
             cell_type = colData(data)$cell_type)
