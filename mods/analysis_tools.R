@@ -1,8 +1,8 @@
 #' @export
 box::use(./h5ad2SE[...],
-         lle[lle])
-box::use(./setup_SLICER[...],
-         tibble[tibble, as_tibble],
+         lle[lle],
+         ./setup_SLICER[...])
+box::use(tibble[tibble, as_tibble],
          ggplot2[...],
          DESeq2[...],
          stats[relevel])
@@ -20,6 +20,7 @@ read_h5ad <- function(path) {
 is_int <- function(x) {
   is.integer(x) || all((x %% 1)==0)
 }
+
 
 #' @param data Summarized Exeriment object
 #' @param gene_subset indicies to subset `data`. If NULL, then
@@ -80,15 +81,16 @@ do_SLICER <- function(data,
   attr(out, "traj_graph") <- traj_graph
   attr(out, "start_node") <- start
   attr(out, "gene_subset") <- gene_subset
+  attr(out, "lle") <- traj_lle
   out
 }
 
 #' @export
-plot_SLICER <- function(traj_df, x, y) {
+plot_SLICER <- function(traj_df, x, y, color = branch) {
   traj_df |>
     dplyr::arrange(order) |>
     ggplot(aes({{x}}, {{y}})) +
-    geom_point(aes(color = branch, group = order)) +
+    geom_point(aes(color = {{color}}, group = order)) +
     labs(title = "Cell Ordering") +
     theme_bw()
 }
@@ -203,7 +205,7 @@ do_deseq_along <- function(data, traj_df) {
     to_comp <- comps[[i]]
     data_sub <- data[,data$branch %in% to_comp]
     data_sub$branch <- factor(relevel(data_sub$branch, ref = to_comp[1]))
-    cat(srpintf("starting comparison %i of %i\n", i, ln))
+    cat(sprintf("starting comparison %i of %i\n", i, ln))
     out[[i]] <- do_deseq(data_sub, ~ branch)
   }
   against <- vapply(out, attr, FUN.VALUE = character(1), which = "against")
@@ -281,4 +283,40 @@ plot_deseq <- function(deseq_res, log2FC = 2, padj = 0.05) {
                            format(log2FC), format(padj))) +
     theme(legend.position = "bottom") +
     scale_color_manual(values = "darkred")
+}
+
+
+#' @param traj_df object returned from do_SLICER()
+#' @param x quoted column name for X coordinates
+#' @param y quoted column name for Y coordinates
+#' @param path file path to save gif
+#' @param exclude_legend logical to exclude (default) or include legend
+#' @param ... additional arguments passed to gganimate::anim_save
+#' @export
+animate_SLICER <- function(traj_df, x, y, path = "example.gif", exclude_legend = TRUE,
+                           ..., branch = branch) {
+  box::use(gganimate[...])
+  anim <- traj_df |>
+    dplyr::arrange(order) |>
+    ggplot(aes({{x}}, {{y}})) +
+    geom_point(aes(color = {{branch}}, group = order), size = 5) +
+    geom_point(aes(color = {{branch}}, group = order), size = 2) +
+    labs(title = "Cell Ordering") +
+    theme_bw() +
+    transition_components(order, enter_length = 50L, exit_length = 50L) +
+    shadow_mark(exclude_layer = 1) +
+    enter_grow() +
+    enter_fade() +
+    exit_shrink(size = .2) +
+    exit_fade(alpha = .3)
+
+  if (exclude_legend) {
+    anim <- anim + guides(color = "none")
+  }
+
+  args <- rlang::dots_list(
+    filename = path, animation = anim, ..., duration = 20, fps = 30,
+    .homonyms = "first"
+  )
+  do.call("anim_save", args = args)
 }
