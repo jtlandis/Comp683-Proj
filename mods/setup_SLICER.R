@@ -10,7 +10,7 @@
 tryCatch(invisible(find.package("remotes")),
          # if not, install it
          error = function(cnd) install.packages("remotes"),
-         finally = {function(){
+         finally = {
            # a dependency `lle` was also kicked off CRAN
            # thus we must manually install as well.
            tryCatch(invisible(find.package("lle")),
@@ -22,9 +22,17 @@ tryCatch(invisible(find.package("remotes")),
            tryCatch(invisible(find.package("SLICER")),
                     error = function(cnd) {
                       #if not install it via `remotes`
-                      remotes::install_github("jw156605/SLICER")
+                      remotes::install_github("jtlandis/SLICER")
+                    },
+                    finally = {
+                      if (utils::packageVersion("SLICER")
+                          !=package_version("0.2.0.2")) {
+                        cat("SLICER found, but incorrect version.",
+                            "Installing jtlandis version now.\n")
+                        remotes::install_github("jtlandis/SLICER")
+                      }
                     })
-         }}())
+         })
 
 
 #' export all objects from the SLICER package
